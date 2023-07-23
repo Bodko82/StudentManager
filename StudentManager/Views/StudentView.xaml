@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="StudentManager.Views.StudentView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:local="clr-namespace:StudentManager"
+      mc:Ignorable="d">
+
+    <Grid>
+        <DataGrid ItemsSource="{Binding Students}"
+                  SelectedItem="{Binding SelectedStudent}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Group Name" Binding="{Binding Group.Name}"/>
+                <DataGridTextColumn Header="User Name" Binding="{Binding User.LastName}"/>
+                <!-- Додати інші стовпці за потреби -->
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding AddCommand}" VerticalAlignment="Center">Add Student</Button>
+            <Button Command="{Binding UpdateCommand}" VerticalAlignment="Center">Update Student</Button>
+            <Button Command="{Binding DeleteCommand}" VerticalAlignment="Center">Delete Student</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>
