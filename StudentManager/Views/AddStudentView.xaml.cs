@@ -14,17 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudentManager
+namespace StudentManager.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddStudentView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddStudentView : Window
     {
-        public MainWindow(ViewModelLocator viewModelLocator)
+        public AddStudentView()
         {
             InitializeComponent();
-            DataContext = viewModelLocator.MainWindowViewModel;
+            this.DataContext = new AddStudentViewModel();
         }
     }
 }

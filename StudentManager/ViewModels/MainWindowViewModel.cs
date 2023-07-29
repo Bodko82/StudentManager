@@ -13,14 +13,19 @@ namespace StudentManager.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         private BaseViewModel currentChildView;
+        private HomeViewModel homeViewModel;
+        private StudentViewModel studentViewModel;
         public ICommand CloseWindowCommand { get; private set; }
         public ICommand MaximizeWindowCommand { get; private set; }
         public ICommand MinimizeWindowCommand { get; private set; }
         public ICommand ShowHomeViewCommand { get; private set; }
         public ICommand ShowStudentViewCommand { get; private set; }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(HomeViewModel homeViewModel, StudentViewModel studentViewModel)
         {
+            this.homeViewModel = homeViewModel;
+            this.studentViewModel = studentViewModel;
+
             CloseWindowCommand = new RelayCommand(CloseWindow);
             MaximizeWindowCommand = new RelayCommand(MaximizeWindow);
             MinimizeWindowCommand = new RelayCommand(MinimizeWindow);
@@ -69,12 +74,12 @@ namespace StudentManager.ViewModels
         }
         private void ShowHomeView()
         {
-            CurrentChildView = new HomeViewModel();
+            CurrentChildView = homeViewModel;
         }
 
         private void ShowStudentView()
         {
-            CurrentChildView = new StudentViewModel();
+            CurrentChildView = studentViewModel;
         }
     }
 }

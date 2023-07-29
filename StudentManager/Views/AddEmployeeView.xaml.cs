@@ -11,20 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudentManager
+namespace StudentManager.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddEmployeeView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddEmployeeView : Window
     {
-        public MainWindow(ViewModelLocator viewModelLocator)
+        public AddEmployeeView()
         {
             InitializeComponent();
-            DataContext = viewModelLocator.MainWindowViewModel;
+            this.DataContext = new AddEmployeeViewModel();
         }
     }
 }
