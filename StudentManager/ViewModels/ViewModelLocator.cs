@@ -30,6 +30,13 @@ namespace StudentManager.ViewModels
                 return _serviceProvider.GetRequiredService<HomeViewModel>();
             }
         }
+        public StudentViewModel StudentViewModel
+        {
+            get
+            {
+                return _serviceProvider.GetRequiredService<StudentViewModel>();
+            }
+        }
     }
 
 }

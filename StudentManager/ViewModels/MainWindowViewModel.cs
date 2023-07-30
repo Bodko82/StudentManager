@@ -29,14 +29,15 @@ namespace StudentManager.ViewModels
             CloseWindowCommand = new RelayCommand(CloseWindow);
             MaximizeWindowCommand = new RelayCommand(MaximizeWindow);
             MinimizeWindowCommand = new RelayCommand(MinimizeWindow);
-            ShowHomeViewCommand = new RelayCommand(_ => ShowHomeView());
-            ShowStudentViewCommand = new RelayCommand(_ => ShowStudentView());
+            ShowHomeViewCommand = new RelayCommand(_ => CurrentChildView = homeViewModel);
+            ShowStudentViewCommand = new RelayCommand(_ => CurrentChildView = studentViewModel);
+
             ShowHomeView();
         }
         public BaseViewModel CurrentChildView
         {
             get { return currentChildView; }
-            set
+            private set
             {
                 currentChildView = value;
                 OnPropertyChanged();

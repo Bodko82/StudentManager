@@ -4,9 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="clr-namespace:FontAwesome.Sharp;assembly=FontAwesome.Sharp"
-        xmlns:vm="clr-namespace:StudentManager.ViewModels"
+        xmlns:views="clr-namespace:StudentManager.Views"
+        xmlns:viewModels="clr-namespace:StudentManager.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1300" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+            <views:HomeView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:StudentViewModel}">
+            <views:StudentView />
+        </DataTemplate>
+    </Window.Resources>
     <Border CornerRadius="10" BorderThickness="1">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">

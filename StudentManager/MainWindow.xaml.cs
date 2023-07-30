@@ -16,15 +16,12 @@ using System.Windows.Shapes;
 
 namespace StudentManager
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(ViewModelLocator viewModelLocator)
+        public MainWindow(MainWindowViewModel mainWindowViewModel)
         {
             InitializeComponent();
-            DataContext = viewModelLocator.MainWindowViewModel;
+            DataContext = mainWindowViewModel;
         }
     }
 }

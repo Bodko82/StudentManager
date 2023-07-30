@@ -18,9 +18,9 @@ namespace StudentManager.ViewModels
         private bool _isCourseVisible = false;
         private ISaveStrategy _currentSaveStrategy;
 
-        public HomeViewModel(ContextDB contextDB)
+        public HomeViewModel(ContextDB _contextDB)
         {
-            this.contextDB = contextDB;
+            this.contextDB = _contextDB;
             IsTextBoxVisible = false;
             IsDropdownGroupVisible = false;
             IsCourseVisible = false;
@@ -88,10 +88,12 @@ namespace StudentManager.ViewModels
             {
                 CurrentSaveStrategy?.Save(param);
                 IsTextBoxVisible = false; IsCourseVisible = false; IsDropdownGroupVisible = false; IsDropdownVisible = false;
+                InputData = null; InputDataGroup = null;
             }, param => CurrentSaveStrategy == null || (CurrentSaveStrategy?.CanSave(param) ?? false));
             AddStudentCommand = new RelayCommand(OpenAddStudentView);
             AddEmployeeCommand = new RelayCommand(OpenAddEmployeeView);
         }
+        
         public ICommand ShowAddDepartmentCommand { get; private set; }
         public ICommand ShowAddDepartmentTypeCommand { get; private set; }
         public ICommand ShowAddSpecialityCommand { get; private set; }

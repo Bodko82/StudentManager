@@ -20,9 +20,6 @@ namespace StudentManager
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             serviceProvider = serviceCollection.BuildServiceProvider();
-
-            var viewModelLocator = serviceProvider.GetRequiredService<ViewModelLocator>();
-            Resources.Add("Locator", viewModelLocator);
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -39,9 +36,7 @@ namespace StudentManager
             services.AddScoped<HomeViewModel>();
             services.AddScoped<StudentViewModel>();
             services.AddSingleton<MainWindowViewModel>();
-            services.AddSingleton<ViewModelLocator>();
             services.AddTransient<MainWindow>();
         }
     }
-
 }
