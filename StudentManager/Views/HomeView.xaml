@@ -50,8 +50,8 @@
                 <ComboBox Style="{StaticResource SearchableComboBox}" Grid.Row="1" FontSize="20" Grid.Column="1"  Margin="19,10,0,10" Visibility="{Binding IsDropdownVisible, Converter={StaticResource BoolToVis}, Mode=TwoWay}" HorizontalAlignment="Left" Width="500"
                            ItemsSource="{Binding DropdownItems}" DisplayMemberPath="Type" SelectedItem="{Binding SelectedDropdownItem}"/>
                 <ComboBox Style="{StaticResource SearchableComboBox}" Grid.Row="1" FontSize="20" Grid.Column="1"  Margin="19,10,0,10" Visibility="{Binding IsDropdownGroupVisible, Converter={StaticResource BoolToVis}, Mode=TwoWay}" HorizontalAlignment="Left" Width="500"
-                          ItemsSource="{Binding DropdownSpecialities}" DisplayMemberPath="Type" SelectedItem="{Binding SelectedDropdownItem}"/>
-                <Button x:Name="btnSave" Cursor="Hand" Command="{Binding SaveCommand}" CommandParameter="{Binding}" Grid.Column="1" Grid.Row="4" Content="Зберегти" Background="#FFB7AB26"
+                          ItemsSource="{Binding DropdownSpecialities}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedDropdownItem}"/>
+                <Button x:Name="btnSave" Cursor="Hand" Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Grid.Column="1" Grid.Row="4" Content="Зберегти" Background="#FFB7AB26"
                     Margin="153,17,226,-50" Style="{StaticResource ButtonStyle}"/>
             </Grid>
         </StackPanel>

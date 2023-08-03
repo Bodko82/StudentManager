@@ -35,8 +35,13 @@ namespace StudentManager
             services.AddScoped<ContextDB>();
             services.AddScoped<HomeViewModel>();
             services.AddScoped<StudentViewModel>();
+            services.AddScoped<AddStudentViewModel>();
             services.AddSingleton<MainWindowViewModel>();
             services.AddTransient<MainWindow>();
+        }
+        public ContextDB GetContextDB()
+        {
+            return serviceProvider.GetRequiredService<ContextDB>();
         }
     }
 }

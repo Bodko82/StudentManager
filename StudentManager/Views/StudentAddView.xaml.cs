@@ -1,4 +1,5 @@
-﻿using StudentManager.ViewModels;
+﻿using StudentManager.Models;
+using StudentManager.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +12,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace StudentManager.Views
 {
     /// <summary>
-    /// Interaction logic for AddStudentView.xaml
+    /// Interaction logic for StudentAddView.xaml
     /// </summary>
-    public partial class AddStudentView : Window
+    public partial class StudentAddView : Window
     {
-        public AddStudentView()
+        private HomeViewModel _homeViewModel;
+
+        public StudentAddView(HomeViewModel homeViewModel)
         {
             InitializeComponent();
-            this.DataContext = new AddStudentViewModel();
+            _homeViewModel = homeViewModel;
+            var contextDB = ((App)Application.Current).GetContextDB();
+            this.DataContext = new AddStudentViewModel(_homeViewModel, contextDB);
         }
     }
 }

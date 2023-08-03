@@ -5,7 +5,6 @@
                     xmlns:conv="clr-namespace:StudentManager.Commands;assembly=StudentManager">
     <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     <conv:StringToIconCharConverter x:Key="StringToIconCharConverter" />
-    
     <Style x:Key="menuButtons" TargetType="RadioButton">
         <!--Normal button style-->
         <Setter Property="Height" Value="50"/>
@@ -176,5 +175,28 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
+<!--Watermark-->
+    <Style x:Key="TextBoxWithWatermarkStyle" TargetType="TextBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid>
+                        <TextBox x:Name="txtBox" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}" Background="{TemplateBinding Background}" />
+                        <TextBlock IsHitTestVisible="False" Text="{TemplateBinding Tag}" Foreground="Gray" Margin="5,0,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=txtBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

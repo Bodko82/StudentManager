@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace StudentManager.ViewModels
 {
-    public class SaveGropViewModel : ISaveStrategy
+    public class SaveGropCommand : ISaveStrategy
     {
         public void Save(object parameter)
         {

@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace StudentManager.ViewModels
 {
-    public class SaveDepartmentTypeViewModel : ISaveStrategy
+    public class SaveDepartmentTypeCommand : ISaveStrategy
     {
         public void Save(object parameter)
         {

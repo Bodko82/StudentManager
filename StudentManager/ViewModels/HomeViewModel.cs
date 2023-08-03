@@ -3,6 +3,7 @@ using StudentManager.Commands;
 using StudentManager.Interface;
 using StudentManager.Models;
 using StudentManager.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace StudentManager.ViewModels
         private bool _isTextBoxVisible = false;
         private bool _isCourseVisible = false;
         private ISaveStrategy _currentSaveStrategy;
+        private readonly AddStudentViewModel _addStudentViewModel;
+        public AddStudentViewModel AddStudentViewModel { get; }
 
         public HomeViewModel(ContextDB _contextDB)
         {
@@ -25,6 +28,10 @@ namespace StudentManager.ViewModels
             IsDropdownGroupVisible = false;
             IsCourseVisible = false;
             IsDropdownVisible = false;
+            AddStudentViewModel = new AddStudentViewModel(this, contextDB)
+            {
+                StudentAddedAction = HandleStudentAdded
+            };
             ShowAddDepartmentTypeCommand = new RelayCommand(_ =>
             {
                 IsTextBoxVisible = true;
@@ -32,7 +39,7 @@ namespace StudentManager.ViewModels
                 IsDropdownGroupVisible = false;
                 IsDropdownVisible = false;
                 ErrorMessage = "Введіть назву типу відділу";
-                CurrentSaveStrategy = new SaveDepartmentTypeViewModel();
+                CurrentSaveStrategy = new SaveDepartmentTypeCommand();
             });
             ShowAddDepartmentCommand = new RelayCommand(_ =>
             {
@@ -52,7 +59,7 @@ namespace StudentManager.ViewModels
                 IsDropdownVisible = true;
                 InputLabel = "Тип відділу:";
                 ErrorMessage = "Введіть назву відділу та виберіть тип";
-                CurrentSaveStrategy = new SaveDepartmentViewModel();
+                CurrentSaveStrategy = new SaveDepartmentCommand();
             });
             ShowAddSpecialityCommand = new RelayCommand(_ =>
             {
@@ -61,7 +68,7 @@ namespace StudentManager.ViewModels
                 IsDropdownGroupVisible = false;
                 IsDropdownVisible = false;
                 ErrorMessage = "Введіть назву спеціальності";
-                CurrentSaveStrategy = new SaveSpecialityViewModel();
+                CurrentSaveStrategy = new SaveSpecialityCommand();
             });
             ShowAddGroupCommand = new RelayCommand(_ =>
             {
@@ -81,7 +88,7 @@ namespace StudentManager.ViewModels
                 IsDropdownGroupVisible = true;
                 InputLabel = "Спеціальність:";
                 ErrorMessage = "Введіть групи, курс та виберіть спеціальність";
-                CurrentSaveStrategy = new SaveGropViewModel();
+                CurrentSaveStrategy = new SaveGropCommand();
             });
 
             SaveCommand = new RelayCommand(param =>
@@ -241,8 +248,8 @@ namespace StudentManager.ViewModels
                 OnPropertyChanged();
             }
         }
-        private BindingList<Speciality> dropdownSpecialities;
-        public BindingList<Speciality> DropdownSpecialities
+        private IEnumerable<Speciality> dropdownSpecialities;
+        public IEnumerable<Speciality> DropdownSpecialities
         {
             get { return dropdownSpecialities; }
             set
@@ -253,14 +260,22 @@ namespace StudentManager.ViewModels
         }
         private void OpenAddStudentView(object obj)
         {
-            AddStudentView addStudentView = new AddStudentView();
+            StudentAddView addStudentView = new StudentAddView(this);
             addStudentView.ShowDialog();
         }
+
         private void OpenAddEmployeeView(object obj)
         {
-            AddEmployeeView addEmployeeView = new AddEmployeeView();
-            addEmployeeView.ShowDialog();
+            StudentAddView addStudentView = new StudentAddView(this)
+            {
+                DataContext = AddStudentViewModel
+            };
+            addStudentView.ShowDialog();
         }
-
+        public void HandleStudentAdded(string message)
+        {
+            ErrorMessage = message;
+            ErrorMessageColor = Brushes.Green;
+        }
     }
 }
