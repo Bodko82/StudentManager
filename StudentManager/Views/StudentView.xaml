@@ -7,22 +7,21 @@
       mc:Ignorable="d">
 
     <Grid>
-        <DataGrid ItemsSource="{Binding Students}"
-                  SelectedItem="{Binding SelectedStudent}"
-                  AutoGenerateColumns="False"
-                  CanUserAddRows="False">
+        <DataGrid ItemsSource="{Binding Students}" SelectedItem="{Binding SelectedStudent}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="Group Name" Binding="{Binding Group.Name}"/>
-                <DataGridTextColumn Header="User Name" Binding="{Binding User.LastName}"/>
-                <!-- Додати інші стовпці за потреби -->
+                <DataGridTextColumn Header="Ім'я" Binding="{Binding User.FirstName}"/>
+                <DataGridTextColumn Header="Прізвище" Binding="{Binding User.LastName}"/>
+                <DataGridTextColumn Header="По батькові" Binding="{Binding User.MiddleName}"/>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding User.PhoneNumber}"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding User.Email}"/>
+                <DataGridTextColumn Header="Дата народження" Binding="{Binding User.DateOfBirth}"/>
+                <DataGridTextColumn Header="Група" Binding="{Binding Group.Name}"/>
+                <DataGridTextColumn Header="Спеціальність" Binding="{Binding Group.Speciality.Name}"/>
+                <!-- Замініть 'Name' на відповідну властивість об'єкту Speciality -->
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Orientation="Horizontal">
-            <Button Command="{Binding AddCommand}" VerticalAlignment="Center">Add Student</Button>
-            <Button Command="{Binding UpdateCommand}" VerticalAlignment="Center">Update Student</Button>
-            <Button Command="{Binding DeleteCommand}" VerticalAlignment="Center">Delete Student</Button>
-        </StackPanel>
+        <Button Content="Update" Command="{Binding UpdateCommand}"/>
+        <Button Content="Delete" Command="{Binding DeleteCommand}"/>
     </Grid>
 </UserControl>

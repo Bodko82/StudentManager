@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentManager.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace StudentManager.Views
     /// </summary>
     public partial class StudentView : UserControl
     {
-        public StudentView()
+        public StudentView(StudentViewModel studentViewModel)
         {
             InitializeComponent();
+            this.DataContext = studentViewModel;
         }
     }
 }

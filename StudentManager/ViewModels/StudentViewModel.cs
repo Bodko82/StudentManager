@@ -12,7 +12,6 @@ namespace StudentManager.ViewModels
     {
         private ContextDB _context = new ContextDB();
         private Student _selectedStudent;
-        private ICommand _addCommand;
         private ICommand _updateCommand;
         private ICommand _deleteCommand;
         private ObservableCollection<Student> _students;
@@ -39,21 +38,6 @@ namespace StudentManager.ViewModels
             {
                 _selectedStudent = value;
                 OnPropertyChanged(nameof(SelectedStudent));
-            }
-        }
-
-        public ICommand AddCommand
-        {
-            get
-            {
-                return _addCommand ?? (_addCommand = new RelayCommand(x =>
-                {
-                    var student = new Student();
-                    _context.Students.Add(student);
-                    _context.SaveChanges();
-
-                    LoadStudents();
-                }));
             }
         }
 

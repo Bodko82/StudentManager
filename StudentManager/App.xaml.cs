@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using StudentManager.Models;
 using StudentManager.ViewModels;
+using StudentManager.Views;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -36,6 +37,8 @@ namespace StudentManager
             services.AddScoped<HomeViewModel>();
             services.AddScoped<StudentViewModel>();
             services.AddScoped<AddStudentViewModel>();
+            services.AddScoped<StudentAddView>();  
+            services.AddScoped<AddStudentViewModel>(); 
             services.AddSingleton<MainWindowViewModel>();
             services.AddTransient<MainWindow>();
         }

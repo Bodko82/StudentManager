@@ -20,10 +20,14 @@ namespace StudentManager.Views
     /// </summary>
     public partial class AddEmployeeView : Window
     {
-        public AddEmployeeView()
+        private HomeViewModel _homeViewModel;
+        public AddEmployeeView(HomeViewModel homeViewModel)
         {
             InitializeComponent();
-            this.DataContext = new AddEmployeeViewModel();
+            _homeViewModel = homeViewModel;
+            var contextDB = ((App)Application.Current).GetContextDB();
+            this.DataContext = new AddEmployeeViewModel(_homeViewModel, contextDB);
+            _homeViewModel = homeViewModel;
         }
     }
 }

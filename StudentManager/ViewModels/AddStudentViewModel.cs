@@ -148,6 +148,8 @@ namespace StudentManager.ViewModels
             }
         }
 
+        
+
         private string _inputDataPhone;
         public string InputDataPhone
         {
@@ -191,6 +193,7 @@ namespace StudentManager.ViewModels
                 }
             }
         }
+       
         private Group _studentDropdownItem;
         public Group StudentDropdownItem
         {

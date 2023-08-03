@@ -266,11 +266,8 @@ namespace StudentManager.ViewModels
 
         private void OpenAddEmployeeView(object obj)
         {
-            StudentAddView addStudentView = new StudentAddView(this)
-            {
-                DataContext = AddStudentViewModel
-            };
-            addStudentView.ShowDialog();
+            AddEmployeeView addEmployeeView = new AddEmployeeView(this);
+            addEmployeeView.ShowDialog();
         }
         public void HandleStudentAdded(string message)
         {

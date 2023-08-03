@@ -4,8 +4,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:fa="clr-namespace:FontAwesome.Sharp;assembly=FontAwesome.Sharp"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+    xmlns:valid="clr-namespace:StudentManager.ValidationRules"
+    xmlns:viewmodels="clr-namespace:StudentManager.ViewModels" 
+    d:DataContext="{d:DesignInstance Type=viewmodels:AddEmployeeViewModel}"
+        
     mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-    Height="450" Width="300" 
+    Height="500" Width="300" 
     Background="Transparent" WindowStyle="None" AllowsTransparency="True">
     <Border CornerRadius="10"
         BorderThickness="1">
@@ -36,25 +41,73 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Added Control Buttons-->
             <Grid Grid.Row="0">
                 <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Background="Transparent" Margin="0,0,5,10">
                     <Button x:Name="btnClose"
-                        Style="{StaticResource controlButton}" Tag="{StaticResource color4}" Command="{Binding CloseWindowCommand}"
+                        Style="{StaticResource controlButton}" Tag="{StaticResource color6}" Command="{Binding CloseWindowCommand}"
                         CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
                         <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
                     </Button>
                 </StackPanel>
             </Grid>
-            <TextBox  Grid.Row="1" Margin="50,0,50,10" Text="Ім'я" />
-            <TextBox Grid.Row="2" Margin="50,0,50,10" Text="Прізвище" />
-            <TextBox Grid.Row="3" Margin="50,0,50,10" Text="По батькові" />
-            <TextBox Grid.Row="4" Margin="50,0,50,10" Text="Номер телефону" />
-            <DatePicker Grid.Row="6" Margin="50,0,50,113" Text="Дата народження" />
-            <TextBlock Foreground="LightGray" Grid.Row="5" Margin="50,0,50,10" Text="Дата народження" />
-            <Button x:Name="btnAddStudent" Grid.Row="9" Content="Додати працівника"
+            <TextBox Text="{Binding InputDataName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxWithWatermarkStyle}"
+         Tag="Ім'я" Grid.Row="2" Margin="50,0,50,10" />
+            <TextBox Style="{StaticResource TextBoxWithWatermarkStyle}" Tag="Прізвище" Text="{Binding InputDataLastName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Margin="50,0,50,10"/>
+            <TextBox Style="{StaticResource TextBoxWithWatermarkStyle}" Tag="По батькові" Text="{Binding InputDataSecondName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Margin="50,0,50,10"/>
+            <StackPanel Background="White" Orientation="Horizontal" Grid.Row="4" Margin="50,0,50,10">
+                <TextBox Text="+38(0" BorderThickness="0" Background="Transparent" IsReadOnly="True"/>
+                <xctk:MaskedTextBox x:Name="PhoneNumber" Mask="00)000-00-00" Text="{Binding InputDataPhone, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <TextBox Style="{StaticResource TextBoxWithWatermarkStyle}" Tag="Email" Grid.Row="5" Margin="50,0,50,10">
+                <TextBox.Text>
+                    <Binding Path="InputDataEmail" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <valid:EmailValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBlock Foreground="LightGray" Grid.Row="8" Margin="50,0,50,10" Text="Дата народження" />
+            <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}" Grid.Row="9" Margin="50,0,50,25" />
+            <TextBox Style="{StaticResource TextBoxWithWatermarkStyle}" Tag="Посада" Text="{Binding InputDataPosition, UpdateSourceTrigger=PropertyChanged}" Grid.Row="10" Margin="50,0,50,10"/>
+            <TextBlock Foreground="LightGray" Grid.Row="11" Margin="50,0,50,10" Text="Прийнятий на роботу" />
+            <DatePicker SelectedDate="{Binding HireDate, UpdateSourceTrigger=PropertyChanged}" Grid.Row="12" Margin="50,0,50,25" />
+            <!-- Для зарплати -->
+            <TextBox Style="{StaticResource TextBoxWithWatermarkStyle}" Tag="Зарплата" Grid.Row="14" Margin="50,0,50,10">
+                <TextBox.Text>
+                    <Binding Path="InputDataSalary" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <valid:DecimalRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <!-- Для стажу -->
+            <TextBox Style="{StaticResource TextBoxWithWatermarkStyle}" Tag="Стаж" Grid.Row="13" Margin="50,0,50,10">
+                <TextBox.Text>
+                    <Binding Path="InputDataExperience" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <valid:OnlyDigitsRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBlock Grid.Row="15" FontSize="14" TextAlignment="Center" Text="{Binding ErrorMessage}" Foreground="LightGray"/>
+            
+            
+            
+            <Button Command="{Binding SaveCommand}" CommandParameter="{Binding}" Grid.Row="16" Content="Додати працівника"
     Background="#d7596d" Margin="0,5,0,0" Style="{StaticResource ButtonStyle}"/>
         </Grid>
     </Border>
